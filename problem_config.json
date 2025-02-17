@@ -1,0 +1,40 @@
+{
+    "entry_point": "cvrp_problem:CVRPProblem",
+    "default_params": {
+      "instance_file": "instances/A-n32-k5.vrp"
+    },
+    "problem_type": "CVRP",
+    "description": "In the capacitated vehicle routing problem (CVRP), a fleet of vehicles with uniform capacity must serve all customers with known demand. Vehicles start and end at a common depot, and each customer is visited exactly once. The objectives are to minimize the number of vehicles used and, secondarily, the total distance traveled.",
+    "keywords": [
+      "CVRP",
+      "vehicle routing",
+      "Augerat",
+      "TSPLib",
+      "optimization"
+    ],
+    "data_format": {
+      "instance_file": {
+        "format": "The instance file follows the Augerat Set A format. It includes keywords such as DIMENSION (total nodes, with depot included), CAPACITY, EDGE_WEIGHT_TYPE (EUC_2D), NODE_COORD_SECTION (node id, x, y for each node), DEMAND_SECTION (node id, demand; depot demand must be 0), and DEPOT_SECTION (depot id followed by -1). Customer indices are shifted so that the depot is excluded (customers are 0-indexed)."
+      }
+    },
+    "decision_variables": {
+      "customersSequences": {
+        "type": "list of lists of int",
+        "description": "A list (one per vehicle) where each inner list represents the ordered sequence of customer indices (0-indexed) visited by that vehicle. These lists form a partition of {0, ..., nb_customers-1}."
+      }
+    },
+    "objective": {
+      "type": "minimization",
+      "function": "Lexicographic combination of number of vehicles used and total distance traveled",
+      "description": "For each vehicle route, compute the route distance as the sum of the distance from the depot to the first customer, the distances between consecutive customers, and the distance from the last customer back to the depot. Also, ensure that the total demand on each route does not exceed the truck capacity. The overall objective is to minimize the number of vehicles used (routes with nonempty sequences) and, secondarily, the total distance traveled."
+    },
+    "solution_representation": "A dictionary with key 'customersSequences' mapping to a list of lists of integers, each representing the route for a vehicle.",
+    "compatible_optimizers": [
+      "genetic_algorithm",
+      "simulated_annealing",
+      "particle_swarm",
+      "tabu_search"
+    ],
+    "notes": "Instances are from the Augerat Set A (e.g., A-n32-k5.vrp). The number of trucks may be deduced from the instance file name (e.g., '-k5') or provided via the command line."
+  }
+  
