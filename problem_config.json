@@ -3,14 +3,17 @@
     "default_params": {
       "instance_file": "instances/A-n32-k5.vrp"
     },
-    "problem_type": "CVRP",
+    "creator": "Rastion",
+    "type": "problem",
+    "problem_name": "Capacitated vehicle routing problem",
     "description": "In the capacitated vehicle routing problem (CVRP), a fleet of vehicles with uniform capacity must serve all customers with known demand. Vehicles start and end at a common depot, and each customer is visited exactly once. The objectives are to minimize the number of vehicles used and, secondarily, the total distance traveled.",
+    "link_to_dataset": "https://github.com/Rastion/cvrp/blob/main/instances/A-n32-k5.vrp",
     "keywords": [
       "CVRP",
       "vehicle routing",
       "Augerat",
       "TSPLib",
-      "optimization"
+      "route-optimization"
     ],
     "data_format": {
       "instance_file": {
@@ -29,11 +32,8 @@
       "description": "For each vehicle route, compute the route distance as the sum of the distance from the depot to the first customer, the distances between consecutive customers, and the distance from the last customer back to the depot. Also, ensure that the total demand on each route does not exceed the truck capacity. The overall objective is to minimize the number of vehicles used (routes with nonempty sequences) and, secondarily, the total distance traveled."
     },
     "solution_representation": "A dictionary with key 'customersSequences' mapping to a list of lists of integers, each representing the route for a vehicle.",
-    "compatible_optimizers": [
-      "genetic_algorithm",
-      "simulated_annealing",
-      "particle_swarm",
-      "tabu_search"
+    "formulations": [
+      ""
     ],
     "notes": "Instances are from the Augerat Set A (e.g., A-n32-k5.vrp). The number of trucks may be deduced from the instance file name (e.g., '-k5') or provided via the command line."
   }
